@@ -1,0 +1,5 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.jtwig.spring.boot.JtwigAutoConfiguration
+
+# Template availability providers
+org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider=org.jtwig.spring.boot.JtwigTemplateAvailabilityProvider
