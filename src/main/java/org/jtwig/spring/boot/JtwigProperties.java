@@ -1,6 +1,7 @@
 package org.jtwig.spring.boot;
 
 
+import org.jtwig.environment.EnvironmentConfiguration;
 import org.jtwig.environment.EnvironmentConfigurationBuilder;
 import org.jtwig.spring.JtwigViewResolver;
 import org.jtwig.web.servlet.JtwigRenderer;
@@ -16,15 +17,15 @@ public class JtwigProperties extends AbstractTemplateViewResolverProperties {
     static final String DEFAULT_PREFIX = "classpath:/templates/";
     static final String DEFAULT_SUFFIX = ".twig";
 
-    private EnvironmentConfigurationBuilder configurationBuilder = EnvironmentConfigurationBuilder.configuration();
+    private EnvironmentConfiguration environmentConfiguration = EnvironmentConfigurationBuilder.configuration().build();
 
     public JtwigProperties() {
         super(DEFAULT_PREFIX, DEFAULT_SUFFIX);
         this.setCache(true);
     }
 
-    public void setConfigurationBuilder(EnvironmentConfigurationBuilder configurationBuilder) {
-        this.configurationBuilder = configurationBuilder;
+    public void setConfigurationBuilder(EnvironmentConfiguration configuration) {
+        this.environmentConfiguration = configuration;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class JtwigProperties extends AbstractTemplateViewResolverProperties {
         isInstanceOf(JtwigViewResolver.class, viewResolver,
                 "ViewResolver is not an instance of JtwigViewResolver :" + viewResolver);
 
-        ((JtwigViewResolver)viewResolver).setRenderer(new JtwigRenderer(configurationBuilder));
+        ((JtwigViewResolver)viewResolver).setRenderer(new JtwigRenderer(environmentConfiguration));
 
     }
 }
