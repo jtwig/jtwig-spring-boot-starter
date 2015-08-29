@@ -1,7 +1,7 @@
 package org.jtwig.spring.boot;
 
 
-import org.jtwig.environment.EnvironmentConfigurationBuilder;
+import org.jtwig.environment.EnvironmentConfiguration;
 import org.jtwig.spring.JtwigViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -20,13 +20,13 @@ public class JtwigAutoConfiguration {
         private JtwigProperties properties;
 
         @Autowired(required = false)
-        private EnvironmentConfigurationBuilder configurationBuilder;
+        private EnvironmentConfiguration configuration;
 
         @Bean
         public JtwigViewResolver jtwigViewResolver() {
             JtwigViewResolver viewResolver = new JtwigViewResolver();
-            if (configurationBuilder != null) {
-                properties.setConfigurationBuilder(configurationBuilder);
+            if (configuration != null) {
+                properties.setConfigurationBuilder(configuration);
             }
             properties.applyToViewResolver(viewResolver);
             return viewResolver;
