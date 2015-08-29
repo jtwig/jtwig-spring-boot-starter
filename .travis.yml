@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - oraclejdk7
+
+env:
+  TERM: dumb
+
+after_success:
+ - gradle jacocoTestReport coveralls
+ - if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then gradle bintrayUpload ; fi
