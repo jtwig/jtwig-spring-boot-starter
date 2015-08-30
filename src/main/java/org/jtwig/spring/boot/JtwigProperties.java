@@ -24,7 +24,7 @@ public class JtwigProperties extends AbstractTemplateViewResolverProperties {
         this.setCache(true);
     }
 
-    public void setConfigurationBuilder(EnvironmentConfiguration configuration) {
+    public void setConfiguration(EnvironmentConfiguration configuration) {
         this.environmentConfiguration = configuration;
     }
 
