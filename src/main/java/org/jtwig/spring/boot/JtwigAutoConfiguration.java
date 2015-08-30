@@ -26,7 +26,7 @@ public class JtwigAutoConfiguration {
         public JtwigViewResolver jtwigViewResolver() {
             JtwigViewResolver viewResolver = new JtwigViewResolver();
             if (configuration != null) {
-                properties.setConfigurationBuilder(configuration);
+                properties.setConfiguration(configuration);
             }
             properties.applyToViewResolver(viewResolver);
             return viewResolver;
