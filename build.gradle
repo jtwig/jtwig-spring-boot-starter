@@ -29,7 +29,7 @@ buildscript {
 }
 
 dependencies {
-    compile 'org.jtwig:jtwig-spring:5.+'
+    compile 'org.jtwig:jtwig-spring:5.13'
 
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.+'
     compile 'org.springframework.boot:spring-boot-configuration-processor:1.2.+'
