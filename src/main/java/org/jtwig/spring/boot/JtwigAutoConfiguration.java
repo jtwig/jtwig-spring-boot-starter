@@ -1,7 +1,6 @@
 package org.jtwig.spring.boot;
 
 
-import org.jtwig.environment.EnvironmentConfiguration;
 import org.jtwig.spring.JtwigViewResolver;
 import org.jtwig.spring.boot.config.JtwigViewResolverConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +20,15 @@ public class JtwigAutoConfiguration {
         private JtwigProperties properties;
 
         @Autowired(required = false)
-        private EnvironmentConfiguration configuration;
-
-        @Autowired(required = false)
         private JtwigViewResolverConfigurer configurer;
 
         @Bean
         public JtwigViewResolver jtwigViewResolver() {
             JtwigViewResolver viewResolver = new JtwigViewResolver();
-            if (configuration != null) {
-                properties.setConfiguration(configuration);
-            }
-            properties.applyToViewResolver(viewResolver);
             if (configurer != null) {
                 configurer.configure(viewResolver);
             }
+            properties.applyToViewResolver(viewResolver);
             return viewResolver;
         }
     }
