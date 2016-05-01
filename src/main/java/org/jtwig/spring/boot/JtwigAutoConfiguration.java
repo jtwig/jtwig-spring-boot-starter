@@ -3,6 +3,7 @@ package org.jtwig.spring.boot;
 
 import org.jtwig.spring.JtwigViewResolver;
 import org.jtwig.spring.boot.config.JtwigViewResolverConfigurer;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,6 +17,8 @@ public class JtwigAutoConfiguration {
 
     @Configuration
     protected static class JtwigViewResolverConfiguration {
+        private final static Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JtwigAutoConfiguration.class);
+
         @Autowired
         private JtwigProperties properties;
 
@@ -25,10 +28,15 @@ public class JtwigAutoConfiguration {
         @Bean
         public JtwigViewResolver jtwigViewResolver() {
             JtwigViewResolver viewResolver = new JtwigViewResolver();
+
+            properties.applyToViewResolver(viewResolver);
+
             if (configurer != null) {
+                LOGGER.info("Jtwig View Resolver configurer provided, applying custom configuration");
                 configurer.configure(viewResolver);
             }
-            properties.applyToViewResolver(viewResolver);
+
+            LOGGER.info("Jtwig View Resolver bean added to the context");
             return viewResolver;
         }
     }
