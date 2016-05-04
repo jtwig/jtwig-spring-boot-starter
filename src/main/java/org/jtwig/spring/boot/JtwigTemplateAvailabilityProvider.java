@@ -1,15 +1,25 @@
 package org.jtwig.spring.boot;
 
+import org.jtwig.spring.boot.availability.IsClassPresent;
 import org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.ClassUtils;
 
 public class JtwigTemplateAvailabilityProvider implements TemplateAvailabilityProvider {
+    private final IsClassPresent isClassPresent;
+
+    public JtwigTemplateAvailabilityProvider(IsClassPresent isClassPresent) {
+        this.isClassPresent = isClassPresent;
+    }
+
+    public JtwigTemplateAvailabilityProvider() {
+        this(new IsClassPresent());
+    }
+
     @Override
     public boolean isTemplateAvailable(String view, Environment environment, ClassLoader classLoader, ResourceLoader resourceLoader) {
-        if (!ClassUtils.isPresent("org.jtwig.spring.JtwigViewResolver", classLoader)
-                || !ClassUtils.isPresent("org.jtwig.JtwigTemplate", classLoader)
+        if (!isClassPresent.isPresent(classLoader, "org.jtwig.spring.JtwigViewResolver")
+                || !isClassPresent.isPresent(classLoader, "org.jtwig.JtwigTemplate")
                 ) {
             return false;
         }
