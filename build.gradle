@@ -29,7 +29,9 @@ buildscript {
 }
 
 dependencies {
-    compile 'org.jtwig:jtwig-spring:5.+'
+    compile ('org.jtwig:jtwig-spring:5.+') {
+        exclude group: "org.slf4j", module: "slf4j-nop"
+    }
 
     compile 'org.springframework.boot:spring-boot-starter-web:1.3.3.RELEASE'
     compile 'org.springframework.boot:spring-boot-configuration-processor:1.3.3.RELEASE'
