@@ -34,6 +34,7 @@ bintray {
     publications = ['MavenCentral']
 
     publish = true
+    override = !isRelease()
 
     pkg {
         repo = isRelease() ? 'maven' : 'snapshots'
@@ -41,7 +42,6 @@ bintray {
         userOrg = 'jtwig'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/jtwig/'+project.name+'.git'
-
         version {
             gpg {
                 sign = isRelease()
