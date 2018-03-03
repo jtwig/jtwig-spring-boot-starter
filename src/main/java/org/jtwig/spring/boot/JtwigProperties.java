@@ -20,8 +20,8 @@ public class JtwigProperties extends AbstractTemplateViewResolverProperties {
     }
 
     @Override
-    public void applyToViewResolver(Object viewResolver) {
-        super.applyToViewResolver(viewResolver);
+    public void applyToMvcViewResolver(Object viewResolver) {
+        super.applyToMvcViewResolver(viewResolver);
         isInstanceOf(JtwigViewResolver.class, viewResolver,
                 "ViewResolver is not an instance of JtwigViewResolver :" + viewResolver);
     }

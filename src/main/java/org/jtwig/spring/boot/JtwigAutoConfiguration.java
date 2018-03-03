@@ -29,7 +29,7 @@ public class JtwigAutoConfiguration {
         public JtwigViewResolver jtwigViewResolver() {
             JtwigViewResolver viewResolver = new JtwigViewResolver();
 
-            properties.applyToViewResolver(viewResolver);
+            properties.applyToMvcViewResolver(viewResolver);
 
             if (configurer != null) {
                 LOGGER.info("Jtwig View Resolver configurer provided, applying custom configuration");

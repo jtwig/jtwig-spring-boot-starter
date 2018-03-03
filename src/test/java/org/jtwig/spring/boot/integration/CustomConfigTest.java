@@ -9,7 +9,7 @@ import org.jtwig.spring.boot.config.JtwigViewResolverConfigurer;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,8 +23,8 @@ public class CustomConfigTest {
 
     @Test
     public void simpleTest() throws Exception {
-        AnnotationConfigEmbeddedWebApplicationContext context = (AnnotationConfigEmbeddedWebApplicationContext) SpringApplication.run(Config.class, "--server.port=0");
-        int port = context.getEmbeddedServletContainer().getPort();
+        AnnotationConfigServletWebServerApplicationContext context = (AnnotationConfigServletWebServerApplicationContext) SpringApplication.run(Config.class, "--server.port=0");
+        int port = context.getWebServer().getPort();
         HttpGet httpGet = new HttpGet(String.format("http://localhost:%d", port));
         CloseableHttpResponse response = HttpClients.createDefault().execute(httpGet);
         String content = IOUtils.toString(response.getEntity().getContent());
