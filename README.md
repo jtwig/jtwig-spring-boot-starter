@@ -1,5 +1,7 @@
 # Jtwig Spring Boot Starter
 
+Compatible with Spring Boot 2
+
 **Build Stats**
 
 [![Build Status](https://travis-ci.org/jtwig/jtwig-spring-boot-starter.svg?branch=master)](https://travis-ci.org/jtwig/jtwig-spring-boot-starter)
